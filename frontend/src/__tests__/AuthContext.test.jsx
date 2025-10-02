@@ -38,7 +38,6 @@ function TestComponent() {
 
 describe('AuthContext', () => {
   beforeEach(() => {
-    localStorage.clear();
     vi.clearAllMocks();
   });
 

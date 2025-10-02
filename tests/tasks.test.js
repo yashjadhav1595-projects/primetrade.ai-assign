@@ -2,11 +2,15 @@ import request from 'supertest';
 import { app } from './setup.js';
 
 async function registerAndLogin() {
-  const email = `u${Date.now()}@example.com`;
+  const email = `user${Date.now()}@example.com`;
   const password = 'Password123!';
-  await request(app).post('/api/v1/auth/register').send({ name: 'U', email, password });
-  const res = await request(app).post('/api/v1/auth/login').send({ email, password });
-  return res.body.tokens.accessToken;
+  
+  const registerRes = await request(app)
+    .post('/api/v1/auth/register')
+    .send({ name: 'Test User', email, password })
+    .expect(201);
+  
+  return registerRes.body.tokens.accessToken;
 }
 
 describe('Tasks', () => {
