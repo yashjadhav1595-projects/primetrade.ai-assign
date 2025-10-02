@@ -20,6 +20,30 @@ const localStorageMock = (() => {
 
 global.localStorage = localStorageMock;
 
+// Mock global URL if not available (for Node.js compatibility)
+if (typeof global.URL === 'undefined') {
+  global.URL = class URL {
+    constructor(url) {
+      this.href = url;
+    }
+  };
+}
+
+// Mock global URLSearchParams if not available
+if (typeof global.URLSearchParams === 'undefined') {
+  global.URLSearchParams = class URLSearchParams {
+    constructor() {
+      this.params = new Map();
+    }
+    get(name) {
+      return this.params.get(name);
+    }
+    set(name, value) {
+      this.params.set(name, value);
+    }
+  };
+}
+
 // Reset storage before each test
 beforeEach(() => {
   localStorageMock.clear();
