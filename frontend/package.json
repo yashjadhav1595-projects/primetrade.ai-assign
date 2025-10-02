@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview --port 5173",
     "test": "vitest run",
-    "test:ui": "vitest"
+    "test:ui": "vitest",
+    "test:ci": "node test-ci.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
